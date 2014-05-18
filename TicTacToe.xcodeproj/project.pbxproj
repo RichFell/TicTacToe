@@ -21,7 +21,6 @@
 		9BFF65B619253D7B0062FD8F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BFF659819253D7B0062FD8F /* UIKit.framework */; };
 		9BFF65BE19253D7B0062FD8F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BFF65BC19253D7B0062FD8F /* InfoPlist.strings */; };
 		9BFF65C019253D7B0062FD8F /* TicTacToeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BFF65BF19253D7B0062FD8F /* TicTacToeTests.m */; };
-		9BFF65CA192540630062FD8F /* CheckMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BFF65C9192540630062FD8F /* CheckMate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +53,6 @@
 		9BFF65BB19253D7B0062FD8F /* TicTacToeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TicTacToeTests-Info.plist"; sourceTree = "<group>"; };
 		9BFF65BD19253D7B0062FD8F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9BFF65BF19253D7B0062FD8F /* TicTacToeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicTacToeTests.m; sourceTree = "<group>"; };
-		9BFF65C9192540630062FD8F /* CheckMate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CheckMate.framework; path = ../../../Desktop/CheckMate.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +60,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BFF65CA192540630062FD8F /* CheckMate.framework in Frameworks */,
 				9BFF659719253D7B0062FD8F /* CoreGraphics.framework in Frameworks */,
 				9BFF659919253D7B0062FD8F /* UIKit.framework in Frameworks */,
 				9BFF659519253D7B0062FD8F /* Foundation.framework in Frameworks */,
@@ -104,7 +101,6 @@
 		9BFF659319253D7B0062FD8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9BFF65C9192540630062FD8F /* CheckMate.framework */,
 				9BFF659419253D7B0062FD8F /* Foundation.framework */,
 				9BFF659619253D7B0062FD8F /* CoreGraphics.framework */,
 				9BFF659819253D7B0062FD8F /* UIKit.framework */,
@@ -468,6 +464,7 @@
 				9BFF65C519253D7B0062FD8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9BFF65C619253D7B0062FD8F /* Build configuration list for PBXNativeTarget "TicTacToeTests" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +473,7 @@
 				9BFF65C819253D7B0062FD8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
