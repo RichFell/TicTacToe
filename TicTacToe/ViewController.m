@@ -19,6 +19,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *myLabelEight;
 @property (strong, nonatomic) IBOutlet UILabel *myLabelNine;
 @property (strong, nonatomic) IBOutlet UILabel *whichPlayerLabel;
+@property CGAffineTransform whichPlayerLabelTransform;
+@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 
 
 
@@ -31,8 +33,10 @@
     [super viewDidLoad];
     //setting the whichPLayerLabel to X because my method follows its text to set the X and O for the labels
     self.whichPlayerLabel.text = @"X";
-}
+    self.whichPlayerLabelTransform = self.whichPlayerLabel.transform;
+    [self createTimer];
 
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -102,7 +106,7 @@
     //setting the point that we want to check as the the point where we are tapping
     CGPoint point;
     point = [tapGestureRecognizer locationInView:self.view];
-    UILabel *label = [self findLabelUsingPoint:point];//calls on the helper method to ineract with whatever label we are touching
+    UILabel *label = [self findLabelUsingPoint:point];//calls on the helper method to interact with whatever label we are touching
 
     //this first if statement stops us from being able to change a label after its been selected
     if ([label.text isEqual:@"X"])
@@ -127,13 +131,59 @@
             label.text = @"O";
             label.textColor = [UIColor redColor];
         }
+        if (CGRectContainsPoint(label.frame, point))
+        { //keeps the whichPlayerLabel from switching unless tapped inside of a label
         [self switchPlayerLabel];//helper method to switch the whichPlayerLabel.text
 //        [self whoWon];
+        }
     }
     [self whoWon];//calling my helper method to show alert when X is the winner
     [self oIsMyWinner];//calling my helper method to show alert when O is the winner
+}
+-(IBAction)onLabelDrag: (UIPanGestureRecognizer *) panGestureRecognizer
+{
+    CGPoint point;
+    point = [panGestureRecognizer locationInView: self.view];
+    self.whichPlayerLabel.transform = CGAffineTransformMakeTranslation(point.x, point.y);
+    point.x += self.whichPlayerLabel.center.x;
+    point.y += self.whichPlayerLabel.center.y;
+
+
+        if (panGestureRecognizer.state == UIGestureRecognizerStateEnded)
+        {
+            UILabel *label = [self findLabelUsingPoint:point];
+            NSLog(@"%@", label);
+
+            self.whichPlayerLabel.transform = self.whichPlayerLabelTransform;
+            if (CGRectContainsPoint(label.frame, point))
+            {
+                NSLog(@"found our label");
+
+                if ([label.text isEqual:@"X"])
+                {
+                    label.text = @"X";
+                }
+                else if ([label.text isEqual:@"O"])
+                {
+                    label.text = @"O";
+                }
+                else
+                {
+                    if ([self.whichPlayerLabel.text isEqual:@"X"])
+                    {
+                        label.text = @"X";
+                    }
+                    else
+                    {
+                        label.text = @"O";
+                    }
+                    [self switchPlayerLabel];
+                }
+            }
+        }
 
 }
+
 -(void) whoWon
 {
     //helper method to decide if X was the winner
@@ -239,13 +289,17 @@
     self.whichPlayerLabel.text = @"X";
     NSLog(@"what?");
 }
-//-(IBAction)onDrag:(UIPanGestureRecognizer *) panGestureRecognizer
-//{
-//    if (panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
-//        <#statements#>
-//    }
-//}
+-(void) createTimer
+{
+//    NSTimer *timer = [NSTimer timerWithTimeInterval:15.0 target:self selector:@selector(atSelector) userInfo:NO repeats:YES];
+    
 
+}
+-(void) atSelector
+{
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"No winner game over!" message:nil delegate:self cancelButtonTitle:@"Restart Game" otherButtonTitles:nil, nil];
+    [alertView show];
+}
 
 
 

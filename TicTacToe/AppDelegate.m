@@ -7,13 +7,14 @@
 //
 
 #import "AppDelegate.h"
-#import <CheckMate/CheckMate.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [CheckMate initializeFramework:@[@"5fffa8f76afd11071e5b427c60d2b728"]];
-    return YES;
+    return nil;
+
+    self.sessionManager = [[SessionManager alloc]init];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

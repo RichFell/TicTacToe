@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9BE71929196B1A3500F62D8D /* SessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE71928196B1A3500F62D8D /* SessionManager.m */; };
+		9BE7192B196B1A9A00F62D8D /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE7192A196B1A9A00F62D8D /* MultipeerConnectivity.framework */; };
+		9BE7192E196B243200F62D8D /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE7192D196B243200F62D8D /* SetupViewController.m */; };
+		9BE71931196B249500F62D8D /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE71930196B249500F62D8D /* BrowserViewController.m */; };
 		9BFF659519253D7B0062FD8F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BFF659419253D7B0062FD8F /* Foundation.framework */; };
 		9BFF659719253D7B0062FD8F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BFF659619253D7B0062FD8F /* CoreGraphics.framework */; };
 		9BFF659919253D7B0062FD8F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BFF659819253D7B0062FD8F /* UIKit.framework */; };
@@ -34,6 +38,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9BE71927196B1A3500F62D8D /* SessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionManager.h; path = ../SessionManager.h; sourceTree = "<group>"; };
+		9BE71928196B1A3500F62D8D /* SessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionManager.m; path = ../SessionManager.m; sourceTree = "<group>"; };
+		9BE7192A196B1A9A00F62D8D /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		9BE7192C196B243200F62D8D /* SetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetupViewController.h; path = ../SetupViewController.h; sourceTree = "<group>"; };
+		9BE7192D196B243200F62D8D /* SetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetupViewController.m; path = ../SetupViewController.m; sourceTree = "<group>"; };
+		9BE7192F196B249500F62D8D /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BrowserViewController.h; path = ../BrowserViewController.h; sourceTree = "<group>"; };
+		9BE71930196B249500F62D8D /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BrowserViewController.m; path = ../BrowserViewController.m; sourceTree = "<group>"; };
 		9BFF659119253D7B0062FD8F /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BFF659419253D7B0062FD8F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9BFF659619253D7B0062FD8F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -60,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BE7192B196B1A9A00F62D8D /* MultipeerConnectivity.framework in Frameworks */,
 				9BFF659719253D7B0062FD8F /* CoreGraphics.framework in Frameworks */,
 				9BFF659919253D7B0062FD8F /* UIKit.framework in Frameworks */,
 				9BFF659519253D7B0062FD8F /* Foundation.framework in Frameworks */,
@@ -101,6 +113,7 @@
 		9BFF659319253D7B0062FD8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9BE7192A196B1A9A00F62D8D /* MultipeerConnectivity.framework */,
 				9BFF659419253D7B0062FD8F /* Foundation.framework */,
 				9BFF659619253D7B0062FD8F /* CoreGraphics.framework */,
 				9BFF659819253D7B0062FD8F /* UIKit.framework */,
@@ -115,8 +128,14 @@
 				9BFF65A319253D7B0062FD8F /* AppDelegate.h */,
 				9BFF65A419253D7B0062FD8F /* AppDelegate.m */,
 				9BFF65A619253D7B0062FD8F /* Main.storyboard */,
+				9BE7192C196B243200F62D8D /* SetupViewController.h */,
+				9BE7192D196B243200F62D8D /* SetupViewController.m */,
+				9BE7192F196B249500F62D8D /* BrowserViewController.h */,
+				9BE71930196B249500F62D8D /* BrowserViewController.m */,
 				9BFF65A919253D7B0062FD8F /* ViewController.h */,
 				9BFF65AA19253D7B0062FD8F /* ViewController.m */,
+				9BE71927196B1A3500F62D8D /* SessionManager.h */,
+				9BE71928196B1A3500F62D8D /* SessionManager.m */,
 				9BFF65AC19253D7B0062FD8F /* Images.xcassets */,
 				9BFF659B19253D7B0062FD8F /* Supporting Files */,
 			);
@@ -251,7 +270,10 @@
 			files = (
 				9BFF65AB19253D7B0062FD8F /* ViewController.m in Sources */,
 				9BFF65A519253D7B0062FD8F /* AppDelegate.m in Sources */,
+				9BE71929196B1A3500F62D8D /* SessionManager.m in Sources */,
+				9BE7192E196B243200F62D8D /* SetupViewController.m in Sources */,
 				9BFF65A119253D7B0062FD8F /* main.m in Sources */,
+				9BE71931196B249500F62D8D /* BrowserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
