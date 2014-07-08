@@ -14,6 +14,7 @@
 @property NSMutableArray *users;
 @property AppDelegate *appDelegate;
 @property (weak, nonatomic) IBOutlet UIButton *startBrowsingButton;
+@property (weak, nonatomic) IBOutlet UIButton *invitingPeerButton;
 
 @end
 
@@ -82,7 +83,10 @@
     {
         void (^invitationHandler)(BOOL, MCSession *) = [self.appDelegate.sessionManager.invitationHandlerArray objectAtIndex:0];
         invitationHandler(accept, self.appDelegate.sessionManager.session);
-      }
+        ViewController *gameVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AlertSegue"];
+        [self.navigationController pushViewController:gameVC animated:YES];
+    }
+
 }
 
 #pragma mark - Helper Methods
@@ -100,6 +104,22 @@
     MCPeerID *peerID = [[notification userInfo]objectForKey:@"peerID"];
     [self.users addObject:peerID];
     [self.tableView reloadData];
+}
+
+#pragma mark - Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    ViewController *gameVC = segue.destinationViewController;
+
+    if (segue.identifier isEqual:@"CellSegue")
+    {
+        gameVC.gameTypeController = @(0);
+    }
+    else if ([segue.identifier isEqual:@"AlertSegue"])
+    {
+        gameVC.gameTypeController = @(3);
+    }
 }
 
 #pragma mark - Notification Listener
