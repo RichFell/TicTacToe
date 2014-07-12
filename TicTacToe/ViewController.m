@@ -7,20 +7,23 @@
 //
 
 #import "ViewController.h"
+#import "CustomLabel.h"
 
 @interface ViewController ()<UIAlertViewDelegate>
-@property (strong, nonatomic) IBOutlet UILabel *myLabelOne;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelTwo;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelThree;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelFour;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelFive;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelSix;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelSeven;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelEight;
-@property (strong, nonatomic) IBOutlet UILabel *myLabelNine;
+@property (strong, nonatomic) IBOutlet CustomLabel *myLabelOne;
+@property (strong, nonatomic) IBOutlet CustomLabel *myLabelTwo;
+@property (strong, nonatomic) IBOutlet CustomLabel *myLabelThree;
+@property (strong, nonatomic) IBOutlet CustomLabel *myLabelFour;
+@property (strong, nonatomic) IBOutlet CustomLabel *myLabelFive;
+@property (strong, nonatomic) IBOutlet CustomLabel *myLabelSix;
+@property (strong, nonatomic) IBOutlet CustomLabel *myLabelSeven;
+@property (strong, nonatomic) IBOutlet CustomLabel *myLabelEight;
+@property (strong, nonatomic) IBOutlet CustomLabel *myLabelNine;
 @property (strong, nonatomic) IBOutlet UILabel *whichPlayerLabel;
 @property CGAffineTransform whichPlayerLabelTransform;
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+@property BOOL switchPlayer;
+@property NSMutableArray *labelsArray;
 
 
 
@@ -35,14 +38,12 @@
     self.whichPlayerLabel.text = @"X";
     self.whichPlayerLabelTransform = self.whichPlayerLabel.transform;
     [self createTimer];
+    self.switchPlayer = YES;
+    self.labelsArray = [NSMutableArray array];
 
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 
-}
--(UILabel *)findLabelUsingPoint: (CGPoint) point
+-(CustomLabel *)findLabelUsingPoint: (CGPoint) point
 {
     //helper method to find if the point is within the frame of the label, and if it is to return the label so we can do something to it
 
@@ -89,14 +90,16 @@
 -(UILabel *)switchPlayerLabel
 //helper method to switch the whichPlayerLabel from X to O and so on
 {
-    if([self.whichPlayerLabel.text isEqual:@"X"])
-    {
-        self.whichPlayerLabel.text = @"O";
-    }
-    else if ([self.whichPlayerLabel.text isEqual:@"O"])
+    if (self.switchPlayer == YES)
     {
         self.whichPlayerLabel.text = @"X";
     }
+
+    else
+    {
+        self.whichPlayerLabel.text = @"O";
+    }
+
     return nil;
 }
 
@@ -106,39 +109,28 @@
     //setting the point that we want to check as the the point where we are tapping
     CGPoint point;
     point = [tapGestureRecognizer locationInView:self.view];
-    UILabel *label = [self findLabelUsingPoint:point];//calls on the helper method to interact with whatever label we are touching
+    CustomLabel *label = [self findLabelUsingPoint:point];//calls on the helper method to interact with whatever label we are touching
 
     //this first if statement stops us from being able to change a label after its been selected
-    if ([label.text isEqual:@"X"])
+    if (label.canTap == YES)
     {
-        label.text = @"X";
-    }
-    else if ([label.text isEqual:@"O"])
-    {
-        label.text = @"O";
-    }
-    else
-    {
-        //now I am deciding whether the next title tapped will be either an X or O and to set the color
-
-        if ([self.whichPlayerLabel.text  isEqual: @"X"])
+        if (self.switchPlayer == YES)
         {
             label.text = @"X";
             label.textColor = [UIColor blueColor];
+
         }
         else
         {
             label.text = @"O";
             label.textColor = [UIColor redColor];
         }
-        if (CGRectContainsPoint(label.frame, point))
-        { //keeps the whichPlayerLabel from switching unless tapped inside of a label
-        [self switchPlayerLabel];//helper method to switch the whichPlayerLabel.text
-//        [self whoWon];
-        }
+        [self.labelsArray addObject:label];
+
+        label.canTap = NO;
     }
+    [self isThereAWinner]; //helper method to see if there is a winner or not
     [self whoWon];//calling my helper method to show alert when X is the winner
-    [self oIsMyWinner];//calling my helper method to show alert when O is the winner
 }
 -(IBAction)onLabelDrag: (UIPanGestureRecognizer *) panGestureRecognizer
 {
@@ -181,113 +173,69 @@
                 }
             }
         }
-
 }
 
 -(void) whoWon
 {
     //helper method to decide if X was the winner
-    if ([self.myLabelOne.text  isEqual:@"X"] &&  [self.myLabelTwo.text  isEqual:@"X"] && [self.myLabelThree.text  isEqual:@"X"])
+
+    if (self.myLabelOne.text == self.myLabelTwo.text  && self.myLabelTwo.text == self.myLabelThree.text)
     {
-        [self xWins];
+        [self showWinner:self.myLabelThree.text];
     }
-    else if ([self.myLabelFour.text  isEqual:@"X"] &&  [self.myLabelFive.text  isEqual:@"X"] && [self.myLabelSix.text  isEqual:@"X"])
+    else if (self.myLabelFour.text == self.myLabelFive.text && self.myLabelSix.text == self.myLabelFive.text)
     {
-        [self xWins];
+        [self showWinner:self.myLabelFive.text];
     }
-    else if ([self.myLabelSeven.text  isEqual:@"X"] &&  [self.myLabelEight.text  isEqual:@"X"] && [self.myLabelNine.text  isEqual:@"X"])
+    else if (self.myLabelSeven.text == self.myLabelEight.text && self.myLabelEight.text == self.myLabelNine.text)
     {
-        [self xWins];
+        [self showWinner:self.myLabelNine.text];
     }
-    else if ([self.myLabelOne.text  isEqual:@"X"] &&  [self.myLabelFour.text  isEqual:@"X"] && [self.myLabelSeven.text  isEqual:@"X"])
+    else if (self.myLabelOne.text == self.myLabelFour.text && self.myLabelFour.text == self.myLabelSeven.text)
     {
-        [self xWins];
+        [self showWinner:self.myLabelOne.text];
     }
-    else if ([self.myLabelTwo.text  isEqual:@"X"] &&  [self.myLabelFive.text  isEqual:@"X"] && [self.myLabelEight.text  isEqual:@"X"])
+    else if (self.myLabelTwo.text == self.myLabelFive.text && self.myLabelFive.text == self.myLabelEight.text)
     {
-        [self xWins];
+        [self showWinner:self.myLabelEight.text];
     }
-    else if ([self.myLabelThree.text  isEqual:@"X"] &&  [self.myLabelSix.text  isEqual:@"X"] && [self.myLabelNine.text  isEqual:@"X"])
+    else if (self.myLabelThree.text == self.myLabelSix.text && self.myLabelSix.text == self.myLabelNine.text)
     {
-        [self xWins];
+        [self showWinner:self.myLabelNine.text];
     }
-    else if ([self.myLabelOne.text  isEqual:@"X"] &&  [self.myLabelFive.text  isEqual:@"X"] && [self.myLabelNine.text  isEqual:@"X"])
+    else if (self.myLabelOne.text == self.myLabelFive.text && self.myLabelFive.text == self.myLabelNine.text)
     {
-        [self xWins];
+        [self showWinner:self.myLabelNine.text];
     }
-    else if ([self.myLabelThree.text  isEqual:@"X"] &&  [self.myLabelFive.text  isEqual:@"X"] && [self.myLabelSeven.text  isEqual:@"X"])
+    else if (self.myLabelThree.text == self.myLabelFive.text && self.myLabelFive.text == self.myLabelSeven.text)
     {
-        [self xWins];
-    }
-}
--(void) xWins
-{
-    //helper method to call my alert view for X winning
-    UIAlertView *winningAlert = [[UIAlertView alloc] init];
-    winningAlert.title = @"X is the winner";
-    [winningAlert addButtonWithTitle:@"Play Again?"];
-    winningAlert.delegate = self;
-    [winningAlert show];
-}
--(void) oIsMyWinner
-{
-    //helper method to evaluate whether O was the winner
-    if ([self.myLabelOne.text  isEqual:@"O"] &&  [self.myLabelTwo.text  isEqual:@"O"] && [self.myLabelThree.text  isEqual:@"O"])
-    {
-        [self oWins];
-    }
-    else if ([self.myLabelFour.text  isEqual:@"O"] &&  [self.myLabelFive.text  isEqual:@"O"] && [self.myLabelSix.text  isEqual:@"O"])
-    {
-        [self oWins];
-    }
-    else if ([self.myLabelSeven.text  isEqual:@"O"] &&  [self.myLabelEight.text  isEqual:@"O"] && [self.myLabelNine.text  isEqual:@"O"])
-    {
-        [self oWins];
-    }
-    else if ([self.myLabelOne.text  isEqual:@"O"] &&  [self.myLabelFour.text  isEqual:@"O"] && [self.myLabelSeven.text  isEqual:@"O"])
-    {
-        [self oWins];
-    }
-    else if ([self.myLabelTwo.text  isEqual:@"O"] &&  [self.myLabelFive.text  isEqual:@"O"] && [self.myLabelEight.text  isEqual:@"O"])
-    {
-        [self oWins];
-    }
-    else if ([self.myLabelThree.text  isEqual:@"O"] &&  [self.myLabelSix.text  isEqual:@"O"] && [self.myLabelNine.text  isEqual:@"O"])
-    {
-        [self oWins];
-    }
-    else if ([self.myLabelOne.text  isEqual:@"O"] &&  [self.myLabelFive.text  isEqual:@"O"] && [self.myLabelNine.text  isEqual:@"O"])
-    {
-        [self oWins];
-    }
-    else if ([self.myLabelThree.text  isEqual:@"O"] &&  [self.myLabelFive.text  isEqual:@"O"] && [self.myLabelSeven.text  isEqual:@"O"])
-    {
-        [self oWins];
+        [self showWinner:self.myLabelSeven.text];
     }
 }
--(void) oWins
+
+-(void)showWinner:(NSString *)string
 {
-    //helper method to call my alert to show that O is the winner
-    UIAlertView *winningAlert = [[UIAlertView alloc] init];
-    winningAlert.title = @"O is the winner";
-    [winningAlert addButtonWithTitle:@"Play Again?"];
-    winningAlert.delegate = self;
-    [winningAlert show];
+    NSString *winnerString = [NSString stringWithFormat:@"%@ is the winner", string];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:winnerString message:nil delegate:self cancelButtonTitle:@"Restart" otherButtonTitles:nil, nil];
+    [alertView show];
+}
+
+-(void)isThereAWinner
+{
+    if (self.labelsArray.count == 9)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Winner Restart?" message:nil delegate:self cancelButtonTitle:@"Restart" otherButtonTitles:nil, nil];
+        [alertView show];
+    }
 }
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    //method to reset game after hitting the button on the alert
-    self.myLabelOne.text = @"";
-    self.myLabelTwo.text = @"";
-    self.myLabelThree.text = @"";
-    self.myLabelFour.text = @"";
-    self.myLabelFive.text = @"";
-    self.myLabelSix.text = @"";
-    self.myLabelSeven.text = @"";
-    self.myLabelEight.text = @"";
-    self.myLabelNine.text = @"";
-    self.whichPlayerLabel.text = @"X";
-    NSLog(@"what?");
+    //resets the game after the alertView is shown
+    for (CustomLabel *label in self.labelsArray)
+    {
+        label.text = @"";
+        label.canTap = YES;
+    }
 }
 -(void) createTimer
 {
@@ -295,7 +243,7 @@
     
 
 }
--(void) atSelector
+-(void) showAlertView
 {
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"No winner game over!" message:nil delegate:self cancelButtonTitle:@"Restart Game" otherButtonTitles:nil, nil];
     [alertView show];

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9BB110DA19717DB8009CB789 /* CustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB110D919717DB8009CB789 /* CustomLabel.m */; };
 		9BE71929196B1A3500F62D8D /* SessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE71928196B1A3500F62D8D /* SessionManager.m */; };
 		9BE7192B196B1A9A00F62D8D /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE7192A196B1A9A00F62D8D /* MultipeerConnectivity.framework */; };
 		9BE7192E196B243200F62D8D /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE7192D196B243200F62D8D /* SetupViewController.m */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9BB110D819717DB8009CB789 /* CustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomLabel.h; path = ../CustomLabel.h; sourceTree = "<group>"; };
+		9BB110D919717DB8009CB789 /* CustomLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomLabel.m; path = ../CustomLabel.m; sourceTree = "<group>"; };
 		9BE71927196B1A3500F62D8D /* SessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionManager.h; path = ../SessionManager.h; sourceTree = "<group>"; };
 		9BE71928196B1A3500F62D8D /* SessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionManager.m; path = ../SessionManager.m; sourceTree = "<group>"; };
 		9BE7192A196B1A9A00F62D8D /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
@@ -136,6 +139,8 @@
 				9BFF65AA19253D7B0062FD8F /* ViewController.m */,
 				9BE71927196B1A3500F62D8D /* SessionManager.h */,
 				9BE71928196B1A3500F62D8D /* SessionManager.m */,
+				9BB110D819717DB8009CB789 /* CustomLabel.h */,
+				9BB110D919717DB8009CB789 /* CustomLabel.m */,
 				9BFF65AC19253D7B0062FD8F /* Images.xcassets */,
 				9BFF659B19253D7B0062FD8F /* Supporting Files */,
 			);
@@ -271,6 +276,7 @@
 				9BFF65AB19253D7B0062FD8F /* ViewController.m in Sources */,
 				9BFF65A519253D7B0062FD8F /* AppDelegate.m in Sources */,
 				9BE71929196B1A3500F62D8D /* SessionManager.m in Sources */,
+				9BB110DA19717DB8009CB789 /* CustomLabel.m in Sources */,
 				9BE7192E196B243200F62D8D /* SetupViewController.m in Sources */,
 				9BFF65A119253D7B0062FD8F /* main.m in Sources */,
 				9BE71931196B249500F62D8D /* BrowserViewController.m in Sources */,

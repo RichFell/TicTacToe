@@ -112,7 +112,7 @@
 {
     ViewController *gameVC = segue.destinationViewController;
 
-    if (segue.identifier isEqual:@"CellSegue")
+    if ([segue.identifier isEqual:@"CellSegue"])
     {
         gameVC.gameTypeController = @(0);
     }
